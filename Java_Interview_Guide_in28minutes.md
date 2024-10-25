@@ -139,7 +139,9 @@ package com.rithus.classmodifiers.defaultaccess.a;
 class DefaultAccessClass {
 //Default access is also called package access
 }
+```
 Another Class in Same Package: Has access to default class
+```java
 package com.rithus.classmodifiers.defaultaccess.a;
 public class AnotherClassInSamePackage {
 //DefaultAccessClass and AnotherClassInSamePackage
@@ -148,7 +150,9 @@ public class AnotherClassInSamePackage {
 //An instance of the class can be created.
 DefaultAccessClass defaultAccess;
 }
+```
 Class in Different Package: NO access to default class
+```java
 package com.rithus.classmodifiers.defaultaccess.b;
 public class ClassInDifferentPackage {
 //Class DefaultAccessClass and Class ClassInDifferentPackage
