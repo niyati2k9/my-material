@@ -126,3 +126,209 @@ many methods (including **get**, **put**, **isEmpty**, **containsKey**, and **co
 - If the problem needs to be solved using multiple inheritances and is composed of different class hierarchies.
 - When unrelated classes implement our interface. For example, Comparable provides the compareTo() method that can be overridden to compare two objects.
 - Consider using the interface when our problem makes the statement “A is capable of [doing this]”. For example, “Clonable is capable of cloning an object”, “Drawable is capable of drawing a shape”, etc.
+
+# Modifiers #
+What is default class modifier?
+- A class is called a Default Class is when there is no access modifier specified on a class.
+- Default classes are visible inside the same package only.
+- Default access is also called Package access.
+Example
+```java
+package com.rithus.classmodifiers.defaultaccess.a;
+/* No public before class. So this class has default access*/
+class DefaultAccessClass {
+//Default access is also called package access
+}
+Another Class in Same Package: Has access to default class
+package com.rithus.classmodifiers.defaultaccess.a;
+public class AnotherClassInSamePackage {
+//DefaultAccessClass and AnotherClassInSamePackage
+//are in same package.
+//So, DefaultAccessClass is visible.
+//An instance of the class can be created.
+DefaultAccessClass defaultAccess;
+}
+Class in Different Package: NO access to default class
+package com.rithus.classmodifiers.defaultaccess.b;
+public class ClassInDifferentPackage {
+//Class DefaultAccessClass and Class ClassInDifferentPackage
+//are in different packages (*.a and *.b)
+//So, DefaultAccessClass is not visible to ClassInDifferentPackage
+//Below line of code will cause compilation error if uncommented
+//DefaultAccessClass defaultAccess; //COMPILE ERROR!!
+}
+```
+## What is private access modifier? ##
+- Private variables and methods can be accessed only in the class they are declared.
+- Private variables and methods from SuperClass are NOT available in SubClass.
+
+## What is default or package access modifier? ##
+a. Default variables and methods can be accessed in the same package Classes.
+b. Default variables and methods from SuperClass are available only to SubClasses in same package.
+
+## What is protected access modifier? ##
+a. Protected variables and methods can be accessed in the same package Classes.
+b. Protected variables and methods from SuperClass are available to SubClass in any package
+
+# What is public access modifier? ##
+a. Public variables and methods can be accessed from every other Java classes.
+b. Public variables and methods from SuperClass are all available directly in the SubClass
+
+# What access types of variables can be accessed from a Class in Same Package? ##
+Look at the code below to understand what can be accessed and what cannot be.
+```java
+package com.rithus.membermodifiers.access;
+public class TestClassInSamePackage {
+public static void main(String[] args) {
+ExampleClass example = new ExampleClass();
+example.publicVariable = 5;
+example.publicMethod();
+//privateVariable is not visible
+//Below Line, uncommented, would give compiler error
+//example.privateVariable=5; //COMPILE ERROR
+//example.privateMethod();
+example.protectedVariable = 5;
+example.protectedMethod();
+example.defaultVariable = 5;
+example.defaultMethod();
+}
+}
+```
+## What access types of variables can be accessed from a Class in Different Package? ##
+Look at the code below to understand what can be accessed and what cannot be.
+```java
+package com.rithus.membermodifiers.access.different;
+import com.rithus.membermodifiers.access.ExampleClass;
+public class TestClassInDifferentPackage {
+public static void main(String[] args) {
+ExampleClass example = new ExampleClass();
+example.publicVariable = 5;
+example.publicMethod();
+//privateVariable,privateMethod are not visible
+//Below Lines, uncommented, would give compiler error
+//example.privateVariable=5; //COMPILE ERROR
+//example.privateMethod();//COMPILE ERROR
+//protectedVariable,protectedMethod are not visible
+//Below Lines, uncommented, would give compiler error
+//example.protectedVariable = 5; //COMPILE ERROR
+//example.protectedMethod();//COMPILE ERROR
+//defaultVariable,defaultMethod are not visible
+//Below Lines, uncommented, would give compiler error
+//example.defaultVariable = 5;//COMPILE ERROR
+//example.defaultMethod();//COMPILE ERROR
+}
+}
+```
+## What access types of variables can be accessed from a Sub Class in Same Package? ##
+Look at the code below to understand what can be accessed and what cannot be.
+```java
+package com.rithus.membermodifiers.access;
+public class SubClassInSamePackage extends ExampleClass {
+void subClassMethod(){
+publicVariable = 5;
+publicMethod();
+//privateVariable is not visible to SubClass
+//Below Line, uncommented, would give compiler error
+//privateVariable=5; //COMPILE ERROR
+//privateMethod();
+protectedVariable = 5;
+protectedMethod();
+defaultVariable = 5;
+defaultMethod();
+}
+}
+```
+## What access types of variables can be accessed from a Sub Class in Different Package? ##
+Look at the code below to understand what can be accessed and what cannot be.
+```java
+package com.rithus.membermodifiers.access.different;
+import com.rithus.membermodifiers.access.ExampleClass;
+public class SubClassInDifferentPackage extends ExampleClass {
+void subClassMethod(){
+publicVariable = 5;
+publicMethod();
+//privateVariable is not visible to SubClass
+//Below Line, uncommented, would give compiler error
+//privateVariable=5; //COMPILE ERROR
+//privateMethod();
+protectedVariable = 5;
+protectedMethod();
+//privateVariable is not visible to SubClass
+//Below Line, uncommented, would give compiler error
+//defaultVariable = 5; //COMPILE ERROR
+//defaultMethod();
+}
+}
+```
+## What is the use of a final modifier on a class? ##
+Final class cannot be extended. Example of Final class in Java is the String class. Final is used very
+rarely as it prevents re-use of the class.Consider the class below which is declared as final.
+Final Class examples : String, Integer, Double and other wrapper classes
+```java
+final public class FinalClass {
+}
+Below class will not compile if uncommented. FinalClass cannot be extended.
+/*
+class ExtendingFinalClass extends FinalClass{ //COMPILER ERROR
+}
+*/
+```
+## What is the use of a final modifier on a method? ##
+Final methods cannot be overridden. Consider the class FinalMemberModifiersExample with method finalMethod which is declared as final.
+public class FinalMemberModifiersExample {
+final void finalMethod(){
+}
+}
+Any SubClass extending above class cannot override the finalMethod().
+```java
+class SubClass extends FinalMemberModifiersExample {
+//final method cannot be over-riddent
+//Below method, uncommented, causes compilation Error
+/*
+final void finalMethod(){
+}
+*/
+}
+```
+## What is a Final variable? ##
+Once initialized, the value of a final variable cannot be changed.
+```java
+final int finalValue = 5;
+//finalValue = 10; //COMPILER ERROR
+Final Variable example : java.lang.Math.PI
+What is a final argument?
+Final arguments value cannot be modified. Consider the example below:
+void testMethod(final int finalArgument){
+//final argument cannot be modified
+//Below line, uncommented, causes compilation Error
+//finalArgument = 5;//COMPILER ERROR
+}
+```
+## What happens when a variable is marked as volatile? ##
+• Volatile can only be applied to instance variables.
+• A volatile variable is one whose value is always written to and read from "main memory". Each
+thread has its own cache in Java. The volatile variable will not be stored on a Thread cache.
+## What is a Static Variable? ##
+Static variables and methods are class level variables and methods. There is only one copy of the static variable for the entire Class. Each instance of the Class (object) will NOT have a unique copy of a static variable. Let’s start with a real world example of a Class with static variable and methods.
+Static Variable/Method – Example
+count variable in Cricketer class is static. The method to get the count value getCount() is also a static method.
+```java
+public class Cricketer {
+private static int count;
+public Cricketer() {
+count++;
+}
+static int getCount() {
+return count;
+}
+public static void main(String[] args) {
+Cricketer cricketer1 = new Cricketer();
+Cricketer cricketer2 = new Cricketer();
+Cricketer cricketer3 = new Cricketer();
+Cricketer cricketer4 = new Cricketer();
+System.out.println(Cricketer.getCount());//4
+}
+}
+```
+4 instances of the Cricketer class are created. Variable count is incremented with every instance created in the constructor.
+
