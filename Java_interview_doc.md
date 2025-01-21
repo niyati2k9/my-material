@@ -1,1 +1,5 @@
-
+### Project description
+* Eparameters is a part of core Banking platform in Sopra. It has 3 components named erole, eorg and ep.
+* **Eorg**: It is used to define the organization inside the bank.It is used to allocate several users to their operational positions.Operational position could be for eg a role/business position inside the bank. Eg Branch director, Account manager, region director etc.It is also used to assign users to different structure elements inside the bank. Structure element could be North branch, Paris branch.
+* **Erole**: It is used to define the authorization model for applications inside the bank.It is used to associate permissions to various profiles on a certain application. Eg Account manager has permissions create,delete on certain profile and Branch director can have permissions modify and create on some profile on a particular application.
+* **eP**: This component is used to save the common parameters  of different applications inside the bank. Eg for payment and loan applications the common parameters would be Calender, currency rate,tax rate and for relationship management applications the common parameters would be marital status,age etc
